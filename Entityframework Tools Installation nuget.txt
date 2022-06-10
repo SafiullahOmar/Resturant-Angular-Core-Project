@@ -1,0 +1,61 @@
+The following example illustrates how to do use code first to to generate a model from a SQL Server database in a new console application using the CLI tools.
+
+First, create a folder for the project:
+
+> mkdir EFCoreScaffoldexample
+Then navigate to it:
+
+> cd EFCoreScaffoldExample
+Then create a new project:
+
+> dotnet new console
+Add the Entity Framework Core and Tools packages to the project:
+
+> dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+> dotnet add package Microsoft.EntityFrameworkCore.Design
+The first package is the EF Core provider for SQL Server. The second package contains the Entity Framework Core commands. Both of these packages are required for any Entity Framework Core application that targets SQL Server.
+
+Test to see if ef commands are available to you:
+
+dotnet ef -h
+
+
+
+
+--------------------------------------------------------------------------------------------------
+Could not execute because the specified command or file was not found. Possible reasons for this include:
+* You misspelled a built-in dotnet command.
+* You intended to execute a .NET Core program, but dotnet-ef does not exist.
+* You intended to run a global tool, but a dotnet-prefixed executable with this name could not be found on the PATH.
+
+try installing the EF Core tool by executing the following command:
+
+dotnet tool install --global dotnet-ef
+You use the DbContext Scaffold command to generate the model. The command has two required arguments - a connection string and a provider. The connection string will depend on your environment and database provider. The provider argument is the Entity Framework provider for your chosen database. This example uses the AdventureWorks sample database for SQL server provided by Microsoft.
+
+> dotnet ef dbcontext scaffold "Server=.\;Database=AdventureWorksLT2012;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model
+Once you have executed the command, you will see that a folder named Model has been created in the project folder, containing a collection of class files representing the entities in addition to a file for the DbContext class:
+
+_____________________________________________________________________________________________________
+The -o option (or alternatively --output-dir) specifies the directory where the class files will be generated. If it is omitted, the class files will be generated in the project directory (where the .csproj file is located).
+
+The DbContext class will take the name of the database plus "Context", You can override this using the -c or --context option e.g.
+
+> dotnet ef dbcontext scaffold "Server=.\;Database=AdventureWorksLT2012;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Model -c "AdventureContext"
+
+______________________________________________________________________________________________
+
+Model Configuration 
+The resulting model is configured using the Fluent API by default, which is the recommended approach. The configurations are placed in the generated context's OnModelCreating method. However, if you prefer to use Data Annotations for configuration, you can use the -d or --data-annotations switch:
+
+dotnet ef dbcontext scaffold "Server=.\;Database=AdventureWorksLT2012;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -d 
+Since Data Annotations only cover a subset of configuration options, you are likely to find that the Fluent API has also been used to configure the model.
+_____________________________________________________________________________________
+
+Updating the Model 
+The recommended approach to keeping changes to the database in sync with the generated model is to use migrations i.e. to make the changes to the model first, and then use tools to generate code that propagates the modifications to the database. However, depending on your circumstances, this may not always be an option. If you need to re-scaffold the model after database schema changes have been made, you can do so by specifying the -f or --force option e.g.:
+
+dotnet ef dbcontext scaffold "Server=.\;Database=AdventureWorksLT2012;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --force
+All of the class files will be overwritten, which means that any amendments that you might have made to them e.g. adding attributes or additional members, will be lost. You can mitigate this by opting to use the Fluent API for configuration and using separate configuration classes. In addition, you can use partial classes to declare additional properties that don't map to columns in the database tables.
+
+_______________________________________________________
