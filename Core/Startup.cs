@@ -1,7 +1,9 @@
+using Core.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,13 @@ namespace Core
         {
 
             services.AddControllers();
+            services.AddDbContext<ResturantContext>(db => db.UseSqlServer(Configuration.GetConnectionString("conn")));
+            services.AddCors(cors => cors.AddPolicy("mypolicy", builder =>
+            {
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+            }));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Core", Version = "v1" });
@@ -47,6 +56,7 @@ namespace Core
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("mypolicy");
 
             app.UseAuthorization();
 
