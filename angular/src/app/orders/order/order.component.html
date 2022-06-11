@@ -1,1 +1,77 @@
-<p>order works!</p>
+<form #form="ngForm" autocomplete="off" *ngIf="Oservice.formData">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="" class="OrderNo">Order No</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">#</div>
+                    </div>
+                    <input type="text" name="OrderNo" #OrderNo="ngModel" [(ngModel)]="Oservice.formData.OrderNo"
+                        class="form-control" readonly>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="" class="OrderNo">Customer</label>
+                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="Oservice.formData.CustomerId"
+                    class="form-control">
+                    <option value="0">--Select--</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="" class="OrderNo">Payment Method</label>
+                <select name="Pmethod" #Pmethod="ngModel" [(ngModel)]="Oservice.formData.Pmethod" class="form-control">
+                    <option value="">--Select--</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="OrderNo">Total</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input type="text" name="Gtotal" #Gtotal="ngModel" [(ngModel)]="Oservice.formData.Gtotal"
+                    class="form-control" readonly>
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+    <table class="table table-borderless">
+        <thead class="thead-light">
+            <th class="">Item</th>
+            <th class="">Price</th>
+            <th class="">Quantity</th>
+            <th class="">Total</th>
+            <th class=""><a href="javascript:void(0);" class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,Oservice.formData.OrderId)">Add Item </a></th>
+
+        </thead>
+        <tbody>
+            <tr *ngIf="Oservice.orderItems.length==0" class="font-italic text-center">
+                <td colspan="5"> No food items are selected !</td>
+            </tr>
+            <tr *ngFor="let item of Oservice.orderItems; let i=index;">
+                    <td>{{item.ItemName}}</td>
+                    <td>{{item.Price}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.Total}}</td>
+                    <td><a href="javascript:void(0);" class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,Oservice.formData.OrderId)">Edit Item </a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark">Submit</button>
+    </div>
+</form>
