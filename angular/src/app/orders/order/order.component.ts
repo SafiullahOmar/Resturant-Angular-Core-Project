@@ -44,4 +44,8 @@ export class OrderComponent implements OnInit {
     this.dialog.open(OrderItemsComponent,config);
   }
 
+  onDeleteOrderItem(OrderItemId:number,i:number){
+    this.Oservice.orderItems.splice(i,1);
+  }
+
 }

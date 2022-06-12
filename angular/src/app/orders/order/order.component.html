@@ -67,7 +67,9 @@
                     <td>{{item.Price}}</td>
                     <td>{{item.Quantity}}</td>
                     <td>{{item.Total}}</td>
-                    <td><a href="javascript:void(0);" class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,Oservice.formData.OrderId)">Edit Item </a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,Oservice.formData.OrderId)">Edit Item </a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">Delete Item </a>
+                    </td>
             </tr>
         </tbody>
     </table>

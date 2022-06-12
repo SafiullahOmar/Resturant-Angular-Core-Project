@@ -19,39 +19,48 @@ export class OrderItemsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<OrderItemsComponent>
     , private itemService: ItemService,
-    private orderService:OrderService) { }
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
 
     this.itemService.getItemList().subscribe(data => this.ItemList = data as Item[]);
-    this.foodItem = {
-      OrderItemId: 0,
-      OrderId!: this.data.OrderId,
-      ItemId!: 0,
-      Quantity!: 0,
-      ItemName!: '',
-      Price: 0,
-      Total: 0
-    };
-  }
-  updatePrice(ctr:any){
-    if(ctr.selectedIndex==0){
-      this.foodItem.Price=0;
-      this.foodItem.ItemName='';
+    console.log(this.data);
+    if (this.data.ItemIndex == null) {
+      this.foodItem = {
+        OrderItemId: 0,
+        OrderId!: this.data.OrderId,
+        ItemId!: 0,
+        Quantity!: 0,
+        ItemName!: '',
+        Price: 0,
+        Total: 0
+      };
+    } else {
+      this.foodItem = Object.assign({}, this.orderService.orderItems[this.data.ItemIndex]);
     }
-    else{
-      this.foodItem.Price=this.ItemList[ctr.selectedIndex-1].price;
-      this.foodItem.ItemName=this.ItemList[ctr.selectedIndex-1].name;
+  }
+  updatePrice(ctr: any) {
+    if (ctr.selectedIndex == 0) {
+      this.foodItem.Price = 0;
+      this.foodItem.ItemName = '';
+    }
+    else {
+      this.foodItem.Price = this.ItemList[ctr.selectedIndex - 1].price;
+      this.foodItem.ItemName = this.ItemList[ctr.selectedIndex - 1].name;
     }
 
     this.updateTotal();
   }
 
-  updateTotal(){
-    this.foodItem.Total=parseFloat((this.foodItem.Quantity * this.foodItem.Price).toFixed(2));
+  updateTotal() {
+    this.foodItem.Total = parseFloat((this.foodItem.Quantity * this.foodItem.Price).toFixed(2));
   }
-  submit(form:NgForm){
-    this.orderService.orderItems.push(form.value);
+  submit(form: NgForm) {
+    if (this.data.ItemIndex == null)
+      this.orderService.orderItems.push(form.value);
+    else
+      this.orderService.orderItems[this.data.ItemIndex] = form.value;
     this.dialogRef.close();
   }
+ 
 }
