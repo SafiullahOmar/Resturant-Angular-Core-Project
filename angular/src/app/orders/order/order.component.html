@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off" *ngIf="Oservice.formData">
+<form #form="ngForm" autocomplete="off" *ngIf="Oservice.formData" (submit)="onSubmit(form)" >
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -7,7 +7,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">#</div>
                     </div>
-                    <input type="text" name="OrderNo" #OrderNo="ngModel" [(ngModel)]="Oservice.formData.OrderNo"
+                    <input type="text" name="OrderNo" #OrderNo="ngModel" [(ngModel)]="Oservice.formData.orderNo"
                         class="form-control" readonly>
                 </div>
 
@@ -15,9 +15,10 @@
 
             <div class="form-group">
                 <label for="" class="OrderNo">Customer</label>
-                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="Oservice.formData.CustomerId"
+                <select name="CustomerId" #CustomerId="ngModel" [(ngModel)]="Oservice.formData.customerId"
                     class="form-control">
                     <option value="0">--Select--</option>
+                    <option *ngFor="let item of customerList" value="{{item.customerId}}">{{item.name}}</option>
                 </select>
             </div>
 
@@ -26,7 +27,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="" class="OrderNo">Payment Method</label>
-                <select name="Pmethod" #Pmethod="ngModel" [(ngModel)]="Oservice.formData.Pmethod" class="form-control">
+                <select name="Pmethod" #Pmethod="ngModel" [(ngModel)]="Oservice.formData.pmethod" class="form-control">
                     <option value="">--Select--</option>
                     <option value="Cash">Cash</option>
                     <option value="Card">Card</option>
@@ -39,7 +40,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input type="text" name="Gtotal" #Gtotal="ngModel" [(ngModel)]="Oservice.formData.Gtotal"
+                    <input type="text" name="Gtotal" #Gtotal="ngModel" [(ngModel)]="Oservice.formData.gtotal"
                     class="form-control" readonly>
                 </div>
                 
@@ -55,7 +56,7 @@
             <th class="">Price</th>
             <th class="">Quantity</th>
             <th class="">Total</th>
-            <th class=""><a href="javascript:void(0);" class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,Oservice.formData.OrderId)">Add Item </a></th>
+            <th class=""><a href="javascript:void(0);" class="btn btn-sm btn-success text-white" (click)="AddOrEditOrderItem(null,Oservice.formData.orderId)">Add Item </a></th>
 
         </thead>
         <tbody>
@@ -63,17 +64,18 @@
                 <td colspan="5"> No food items are selected !</td>
             </tr>
             <tr *ngFor="let item of Oservice.orderItems; let i=index;">
-                    <td>{{item.ItemName}}</td>
-                    <td>{{item.Price}}</td>
-                    <td>{{item.Quantity}}</td>
-                    <td>{{item.Total}}</td>
-                    <td><a href="javascript:void(0);" class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,Oservice.formData.OrderId)">Edit Item </a>
-                        <a href="javascript:void(0);" class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.OrderItemId,i)">Delete Item </a>
+                    <td>{{item.itemName}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.total}}</td>
+                    <td><a href="javascript:void(0);" class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i,Oservice.formData.orderId)">Edit Item </a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.orderItemId,i)">Delete Item </a>
                     </td>
             </tr>
         </tbody>
     </table>
     <div class="form-group">
         <button type="submit" class="btn btn-dark">Submit</button>
+        <a class="btn btn-outline-dark ml-1" routerLink="/orders">View All Orders</a>
     </div>
 </form>

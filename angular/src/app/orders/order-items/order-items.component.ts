@@ -27,13 +27,13 @@ export class OrderItemsComponent implements OnInit {
     console.log(this.data);
     if (this.data.ItemIndex == null) {
       this.foodItem = {
-        OrderItemId: 0,
-        OrderId!: this.data.OrderId,
-        ItemId!: 0,
-        Quantity!: 0,
-        ItemName!: '',
-        Price: 0,
-        Total: 0
+        orderItemId: 0,
+        orderId!: this.data.OrderId,
+        itemId!: 0,
+        quantity!: 0,
+        itemName!: '',
+        price: 0,
+        total: 0
       };
     } else {
       this.foodItem = Object.assign({}, this.orderService.orderItems[this.data.ItemIndex]);
@@ -41,19 +41,19 @@ export class OrderItemsComponent implements OnInit {
   }
   updatePrice(ctr: any) {
     if (ctr.selectedIndex == 0) {
-      this.foodItem.Price = 0;
-      this.foodItem.ItemName = '';
+      this.foodItem.price = 0;
+      this.foodItem.itemName = '';
     }
     else {
-      this.foodItem.Price = this.ItemList[ctr.selectedIndex - 1].price;
-      this.foodItem.ItemName = this.ItemList[ctr.selectedIndex - 1].name;
+      this.foodItem.price = this.ItemList[ctr.selectedIndex - 1].price;
+      this.foodItem.itemName = this.ItemList[ctr.selectedIndex - 1].name;
     }
 
     this.updateTotal();
   }
 
   updateTotal() {
-    this.foodItem.Total = parseFloat((this.foodItem.Quantity * this.foodItem.Price).toFixed(2));
+    this.foodItem.total = parseFloat((this.foodItem.quantity * this.foodItem.price).toFixed(2));
   }
   submit(form: NgForm) {
     if (this.data.ItemIndex == null)
