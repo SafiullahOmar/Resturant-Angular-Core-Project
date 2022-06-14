@@ -1,0 +1,12 @@
+First project : Angular CRUD
+
+	FOlders are :
+	1)Angaular:angular
+	2)AspNETCOre: Core
+	3)database :Database SCript
+
+
+Second Project:
+
+	1)Angular:
+	2)AspNETCOre:User_registration
