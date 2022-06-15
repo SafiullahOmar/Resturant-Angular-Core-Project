@@ -1,0 +1,57 @@
+Example 1:
+
+In this solution, you need to just install bootstrap on your angular 13 and import css file to style.css file. this is only for css importing. so you can run command bellow:
+
+npm install bootstrap --save
+Ok, now you need to import your bootstrap css on style.css file as like bellow:
+
+src/style.css
+
+@import "~bootstrap/dist/css/bootstrap.css";
+Now you can use bootstrap class in your angular 13 app. It will works.
+
+Example 2:
+
+In this solution, we will also install bootstrap with jquery and popper js. so that way you can also import bootstrap css and bootstrap js function. So i think this will be best solution for you i think.
+
+let's run following commands:
+
+npm install bootstrap --save
+npm install jquery --save
+npm install popper.js --save
+Now after successfully run above command. let's import it in angular.json file.
+
+angular.json
+
+....
+      "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "src/styles.css"
+      ],
+      "scripts": [
+          "node_modules/jquery/dist/jquery.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ]
+.....
+
+Now you can easily use bootstrap class as like bellow:
+
+src/app/app.component.html
+
+<div class="container">
+  <h1>Install Bootstrap 5 in Angular 13 - ItSolutionStuff.com</h1>
+  
+  <div class="card">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+Now you can use bootstrap css and js both.
+
+Run Angular App:
