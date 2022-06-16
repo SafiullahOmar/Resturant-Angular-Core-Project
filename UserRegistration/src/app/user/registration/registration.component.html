@@ -28,8 +28,11 @@
           <div class="form-group required">
             <label>Password</label>
             <input type="password" class="form-control" formControlName="Password">
-            <label class="text-danger" *ngIf="service.formModel.controls['password'].touched && service.formModel.controls['password'].errors?.['minLength']">This field  lenght is mandatory.</label>
-            <label class="text-danger" *ngIf="service.formModel.controls['Password'].touched && service.formModel.controls['password'].errors?.['required']">This field is mandatory.</label>
+            {{Passwords.controls['Password'].touched}} 
+           {{Passwords.controls['Password'].errors?.['minlength']}}
+  
+            <label class="text-danger" *ngIf="Passwords.controls['Password'].touched && Passwords.controls['Password'].errors?.['minlength']">min length</label>
+             <label class="text-danger" *ngIf="Passwords.controls['Password'].touched && Passwords.controls['Password'].errors?.['required']">This field is mandatory.</label> 
           </div>
           <div class="form-group required">
             <label>Confirm Password</label>

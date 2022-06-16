@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/shared/user.service';
 
@@ -15,6 +16,9 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get Passwords(){
+    return this.service.formModel.controls["Passwords"] as FormGroup;
+  }
   onSubmit() {
     this.service.register().subscribe(
       (res: any) => {
