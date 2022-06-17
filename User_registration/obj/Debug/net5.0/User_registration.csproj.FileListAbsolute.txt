@@ -22,7 +22,6 @@ D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\U
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.OpenApi.dll
-D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -64,3 +63,4 @@ D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\U
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.Extensions.Identity.Core.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
+D:\MyData\sample projects\Angular Projects\Restaurant Angular Core Application\User_registration\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
