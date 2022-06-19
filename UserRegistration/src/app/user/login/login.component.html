@@ -1,4 +1,4 @@
-<form #form="ngForm" class="mb-4" autocomplete="off">
+<form #form="ngForm" class="mb-4" autocomplete="off" (submit)="OnSubmit(form)">
 <div class="form-group">
     <label for="">UserName</label>
     <input name="UserName" class="form-control" #UserName="ngModel" [(ngModel)]="formModel.UserName"  required>

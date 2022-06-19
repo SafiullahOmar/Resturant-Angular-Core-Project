@@ -40,5 +40,9 @@ export class UserService {
     };
     return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
   }
+
+  login(formData:any){
+    return this.http.post(this.BaseURI + '/ApplicationUser/login', formData );
+  }
   
 }
