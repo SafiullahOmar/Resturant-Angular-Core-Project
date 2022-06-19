@@ -5,15 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
-import { ReactiveFormsModule,NgForm,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, NgForm, FormsModule } from '@angular/forms';
 import { UserService } from './shared/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginComponent } from './user/login/login.component';
 import { HomeComponent } from './home/home.component';
-
+import{ InterceptInterceptor} from './auth/intercept.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,11 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [UserService],
+  providers: [UserService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
