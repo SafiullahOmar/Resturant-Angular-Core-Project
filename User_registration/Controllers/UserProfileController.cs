@@ -23,6 +23,7 @@ namespace User_registration.Controllers
         }
 
         [HttpGet]
+        [Route("UserProfile")]
         [Authorize]
 
         public async Task<object> getUserProfile() {
